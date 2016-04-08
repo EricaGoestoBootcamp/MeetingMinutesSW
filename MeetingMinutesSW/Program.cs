@@ -16,6 +16,7 @@ namespace MeetingMinutesSW
             I just broke my View menu and I don't know how.
             */
             ProgramName();
+            Console.WriteLine(" ");
             Console.WriteLine("MAIN MENU\n---------\n");
             Console.WriteLine("C. Create Meeting");
             Console.WriteLine("V. View Team");
@@ -23,22 +24,30 @@ namespace MeetingMinutesSW
             Console.WriteLine("Enter C V or X to make a selection.");
             //get input, uppercase it, parse to char.
             char mainSelect = char.Parse(Console.ReadLine().ToUpper());
-
+            string fileName;
+            string[] dateArray;
             //Main Menu
             do
             {
                 if (mainSelect == 'C')
                 {
-                    CreateMeeting();
+                    fileName = CreateMeeting();
+                        
                 }
                 else if (mainSelect == 'V')
                 {
                     ViewTeam();
                 }
-                ProgramName();
+                /* else if (mainSelect == 'R')
+                {
+                    ReadMinutes(fileName);
+                    //I don't know how to get this from my CreateMeeting Method down to here
+                } */
+                Console.WriteLine(" ");
                 Console.WriteLine("MAIN MENU\n---------\n");
                 Console.WriteLine("C. Create Meeting");
                 Console.WriteLine("V. View Team");
+                //Console.WriteLine("R. Read Minutes");
                 Console.WriteLine("X. EXIT");
                 Console.WriteLine("Enter C V or X to make a selection.");
                 mainSelect = char.Parse(Console.ReadLine().ToUpper());
@@ -50,7 +59,7 @@ namespace MeetingMinutesSW
 
         //Create Meeting method
 
-        static void CreateMeeting()
+        static string CreateMeeting()
         {
             ProgramName();
             //some variables to start
@@ -82,7 +91,7 @@ namespace MeetingMinutesSW
             {
                 Console.WriteLine("Please enter notes on this topic");
                 notesRecord = Console.ReadLine();
-                Console.WriteLine("Enter more notes?");
+                Console.WriteLine("Enter more notes? Y or N");
                 exit = Char.Parse(Console.ReadLine().ToUpper());
             } while (exit == 'Y');
 
@@ -135,7 +144,7 @@ namespace MeetingMinutesSW
             }
 
             //string toMain = "garbage text";
-            //return toMain;
+            return fileName;
         }
 
         //VIEW TEAM METHOD
@@ -190,7 +199,7 @@ namespace MeetingMinutesSW
                 }
             }
 
-            if (meetingTypeSelection == 'B')
+            else if (meetingTypeSelection == 'B')
             {
                 foreach (var name in teamMembers)
                 {
@@ -201,7 +210,7 @@ namespace MeetingMinutesSW
                 }
             }
 
-            if (meetingTypeSelection == 'S')
+            else if (meetingTypeSelection == 'S')
             {
                 foreach (var name in teamMembers)
                 {
@@ -279,9 +288,9 @@ namespace MeetingMinutesSW
         //STREAMREADER METHOD - not yet implemented
 
 
-        static void ReadScores(string [] dateArray)
+        static void ReadMinutes(string incomingFileName)
         {
-            string fileName = ConvertStringArrayToString(dateArray);
+            string fileName = incomingFileName; 
             try
             {
                 StreamReader reader = new StreamReader(fileName);
